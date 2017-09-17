@@ -37,8 +37,6 @@ function core(argv, callback) {
         argv.unshift(arg[1]);
       }
       arg = arg[0];
-    } else {
-      // aaa
     }
 
     switch (arg) {
@@ -102,6 +100,13 @@ function core(argv, callback) {
       process.stdout.write(`No such file or directory: ${options.dir}\n`);
       return;
     }
+  }
+
+  if (options.maxDepth) {
+    options.maxDepth = +options.maxDepth;
+  }
+  if (options.padLength) {
+    options.padLength = +options.padLength;
   }
 
   let ret = htree(options);

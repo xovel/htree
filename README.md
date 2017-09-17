@@ -44,7 +44,7 @@ htree --dir E:\\git\\xovel\\sinput --size --pad-length 20 -i node_modules --orde
 htree -i node_modules --no-dot --no-underline --size
 ```
 
-**WANRNING**: Do not try to use `htree` in the root disk of `windows` operation system.
+**WARNING**: Do not try to use `htree` in the root disk of `windows` operation system.
 
 > `Documents and Settings` and `System Volume Information` etc will block the access authority, yet I don't have a plan to fix this problem. ~~Although ignoring them or using `try/catch` synax both is good solution.~~
 
@@ -172,7 +172,7 @@ Whether **only** deal with directory, when `folder` is true, the performance of 
 - type: boolean
 - default: `false`
 
-Sort the file list by default. ~~Mostly, it is a redundant options~~.
+Sort the file list by default. ~~Mostly, it is a redundant option~~.
 
 ### size
 
@@ -204,14 +204,14 @@ Whether to show the `dir` in result.
 - type: boolean
 - default: `false`
 
-If the name of a directory begins with character `.`, **ignore** the directory.
+If the name of a directory begins with character `.`, **ignore** the directory while `dot` is false.
 
 ### underline
 
 - type: boolean
 - default: `true`
 
-If the name of a directory begins with character `_`, **ignore** the directory.
+If the name of a directory begins with character `_`, **ignore** the directory while `underline` is false.
 
 ## CLI options
 

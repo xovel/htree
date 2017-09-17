@@ -5,9 +5,6 @@ const genText = require('./util/genText');
 let htree = function (options) {
   options = Object.assign(htree.defaults, options || {});
 
-  options.padLength = +options.padLength;
-  options.maxDepth = +options.maxDepth;
-
   let walkList = walk(options.dir, 1, options);
   let textList = getTextList(walkList, options);
 
