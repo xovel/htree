@@ -1,0 +1,19 @@
+{
+  "name": "htree",
+  "version": "0.1.0",
+  "description": "A file tree for node.js",
+  "main": "index.js",
+  "bin": {
+    "htree": "./bin/htree"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xovel/htree.git"
+  },
+  "homepage": "https://github.com/xovel/htree/",
+  "keywords": [
+    "tree"
+  ],
+  "author": "xovel <xovel@vip.qq.com>",
+  "license": "MIT"
+}

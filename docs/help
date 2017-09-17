@@ -1,0 +1,33 @@
+Usage: htree [options] [value]
+       htree [options=value]
+
+Options:
+  # SYSTEM
+  -v, --version             Print htree version.
+  -h, --help                Print this help.
+  -o, --output              Output file (default STDOUT).
+  --force                   Overwrite output file.
+
+  # BOOLEAN
+  -f, --folder              Only folder.
+  -s, --show-dir            Show current directory.
+  --order                   Rearrangement the order of dirs and files.
+  --size                    Show the size of files.
+  --size-suffix-space       Add a space between size value and size suffix.
+  --sort                    Sort dir/file by default. [deprecated]
+  # Use prefix `--no-` to set a false value, e.g. `--no-size`.
+
+  # VALUE
+  -d, --dir                 Htree directory.
+  -m, --max-deep            Max deep for directory.
+  -i, --ignore              Ignore list, use comma to seperate them.
+  --str-node                The `node` string.
+  --str-last                The `last` string.
+  --str-pipe                The `pipe` string.
+  --str-concat              The `concat` string.
+  --str-gap                 The `gap` string.
+  --str-indent              The `indent` string.
+  --str-comment             The `comment` string.
+  --pad-length              The length of `pad-end`.
+
+For more information, visit the documentation of htree.

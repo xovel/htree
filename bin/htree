@@ -1,0 +1,171 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+const htree = require('../');
+const pkg = require('../package.json');
+
+function core(argv, callback) {
+  let output;
+  let arg;
+  let opt;
+  let value;
+  let options = {};
+  let force = false;
+
+  while (argv.length) {
+    let arg = argv.shift();
+
+    if (!arg) {
+      continue;
+    }
+
+    if (arg.indexOf('--') === 0) {
+      // --key
+      arg = arg.split('=');
+      if (arg.length > 1) {
+        argv.unshift(arg[1]);
+      }
+      arg = arg[0];
+    } else if (arg[0] === '-') {
+      arg = arg.split('=');
+      if (arg[0].length > 2) {
+        // -abc
+        argv = arg[0].substring(1).split('').map((x) => '-' + x + '=' + arg[1]).concat(argv);
+        // arg = argv.shift();
+      } else if (arg.length > 1) {
+        argv.unshift(arg[1]);
+      }
+      arg = arg[0];
+    } else {
+      // aaa
+    }
+
+    switch (arg) {
+      case '-h':
+      case '--help':
+        return help();
+      case '-v':
+      case '--version':
+        return version();
+      case '-o':
+      case '--output':
+        output = argv.shift();
+        break;
+      case '--force':
+        force = true;
+        break;
+      case '-f':
+      case '--folder':
+        options.folder = true;
+        break;
+      case '-d':
+      case '--dir':
+        options.dir = argv.shift();
+        break;
+      case '-m':
+      case '--max-deep':
+        options.maxDeep = argv.shift();
+        break;
+      case '-i':
+      case '--ignore':
+        options.ignore = (argv.shift() || '').split(',');
+        break;
+      case '-s':
+      case '--show-dir':
+        options.showDir = true;
+        break;
+      case '--order':
+        value = argv.shift();
+        if (value) {
+          if (value[0] === '-') {
+            argv.unshift(value);
+            options.order = true;
+          } else {
+            options.order = value;
+          }
+        } else {
+          options.order = true;
+        }
+        break;
+      default:
+        setOptions(arg)
+        break;
+    }
+  }
+
+  if (options.dir) {
+    if (options.dir.indexOf(':') === -1) {
+      options.dir = path.join(process.cwd(), options.dir);
+    }
+    if (!fs.existsSync(options.dir)) {
+      process.stdout.write(`No such file or directory: ${options.dir}\n`);
+      return;
+    }
+  }
+
+  let ret = htree(options);
+
+  if (output) {
+    if (output.indexOf(':') === -1) {
+      output = path.join(process.cwd(), output);
+    }
+    if (fs.existsSync(output)) {
+      if (!force) {
+        process.stdout.write(`Warning: file ${output} already exist, use \`--force\` to overwrite it.\n`);
+        return;
+      }
+    }
+
+    fs.writeFile(output, ret, callback);
+  } else {
+    process.stdout.write(ret + '\n');
+    return callback();
+  }
+
+  function setOptions(curArg) {
+    let curArgName = getArgName(curArg);
+
+    if (htree.defaults.hasOwnProperty(curArgName)) {
+      if (typeof htree.defaults[curArgName] === 'boolean') {
+        options[curArgName] = curArg.indexOf('--no-') !== 0;
+      } else {
+        let curValue = argv.shift();
+        if (curValue) {
+          if (curValue[0] === '-') {
+            argv.unshift(curValue);
+          } else {
+            options[curArgName] = curValue;
+          }
+        }
+      }
+    }
+  }
+
+  function getArgName(str) {
+    return str.replace(/^--(no-)?/, '')
+      .replace(/-(\w)/g, (_, a) => a.toUpperCase());
+  }
+}
+
+function help() {
+  let helpFilePath = path.join(__dirname, '../docs/help');
+  let text = fs.readFileSync(helpFilePath, 'utf-8');
+  process.stdout.write(text + '\n');
+}
+
+function version() {
+  process.stdout.write(pkg.version + '\n');
+}
+
+if (!module.parent) {
+  process.title = pkg.name;
+  core(process.argv.slice(2), (err, code) => {
+    if (err) {
+      throw err;
+    }
+    return process.exit(code || 0);
+  });
+} else {
+  module.exports = core;
+}
