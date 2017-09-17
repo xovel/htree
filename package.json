@@ -1,7 +1,7 @@
 {
   "name": "htree",
   "version": "0.1.1",
-  "description": "A file tree for node.js",
+  "description": "The same as `tree` in Linux/Windows, htree is for node.js.",
   "main": "index.js",
   "bin": {
     "htree": "./bin/htree"

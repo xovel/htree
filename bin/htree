@@ -64,8 +64,8 @@ function core(argv, callback) {
         options.dir = argv.shift();
         break;
       case '-m':
-      case '--max-deep':
-        options.maxDeep = argv.shift();
+      case '--max-depth':
+        options.maxDepth = argv.shift();
         break;
       case '-i':
       case '--ignore':

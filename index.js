@@ -6,7 +6,7 @@ let htree = function (options) {
   options = Object.assign(htree.defaults, options || {});
 
   options.padLength = +options.padLength;
-  options.maxDeep = +options.maxDeep;
+  options.maxDepth = +options.maxDepth;
 
   let walkList = walk(options.dir, 1, options);
   let textList = getTextList(walkList, options);
@@ -16,7 +16,7 @@ let htree = function (options) {
 
 htree.defaults = {
   ignore: [],
-  maxDeep: 5,
+  maxDepth: 5,
   strNode: '├',
   strLast: '└',
   strPipe: '│',

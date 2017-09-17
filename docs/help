@@ -18,7 +18,7 @@ Options:
 
   # VALUE
   -d, --dir                 Htree directory.
-  -m, --max-deep            Max deep for directory.
+  -m, --max-depth           Max depth for directory.
   -i, --ignore              Ignore list, use comma to seperate them.
   --str-node                The `node` string.
   --str-last                The `last` string.
@@ -29,4 +29,4 @@ Options:
   --str-comment             The `comment` string.
   --pad-length              The length of `pad-end`.
 
-For more information, please visit the documentation of htree.
+For more information, please visit the `README.md` of htree.

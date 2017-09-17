@@ -13,7 +13,7 @@ module.exports = function walk(dir, deep, options) {
   }
 
   curList.forEach((name, index) => {
-    if (options.ignore.indexOf(name) === -1 && deep <= options.maxDeep) {
+    if (options.ignore.indexOf(name) === -1 && deep <= options.maxDepth) {
       let curFilePath = path.join(dir, name);
       let curFileStat = fs.statSync(curFilePath);
       if (curFileStat.isDirectory()) {
