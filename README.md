@@ -34,6 +34,20 @@ console.log(data);
 htree [options]
 ```
 
+#### Example
+
+```shell
+htree --size
+htree -i=node_modules
+htree -i node_modules,.git --output file.txt
+htree --dir E:\\git\\xovel\\sinput --size --pad-length 20 -i node_modules --order back
+htree -i node_modules --no-dot --no-underline --size
+```
+
+**WANRNING**: Do not try to use `htree` in the root disk of `windows` operation system.
+
+> `Documents and Settings` and `System Volume Information` etc will block the access authority, yet I don't have a plan to fix this problem. ~~Although ignoring them or using `try/catch` synax both is good solution.~~
+
 ## Options
 
 ```js
@@ -53,7 +67,9 @@ htree.defaults = {
   sort: false,
   size: false,
   order: true,
-  showDir: true
+  showDir: true,
+  dot: false,
+  underline: true
 };
 ```
 
@@ -161,14 +177,14 @@ Sort the file list by default. ~~Mostly, it is a redundant options~~.
 ### size
 
 - type: boolean
-- default: false
+- default: `false`
 
 Show file's size in the end of each line.
 
 ### order
 
 - type: boolean
-- default: true
+- default: `true`
 
 When `order` is **true**, file will be listed before directory.
 
@@ -179,9 +195,23 @@ When `order` is **false**, the order of file and directory will not changed.
 ### showDir
 
 - type: boolean
-- default: true
+- default: `true`
 
 Whether to show the `dir` in result.
+
+### dot
+
+- type: boolean
+- default: `false`
+
+If the name of a directory begins with character `.`, **ignore** the directory.
+
+### underline
+
+- type: boolean
+- default: `true`
+
+If the name of a directory begins with character `_`, **ignore** the directory.
 
 ## CLI options
 
@@ -208,6 +238,7 @@ Additional notes:
 - `--no-` does not support short command.
 - `--str-indent` does not support **empty string**.
 - Short command combination **must** be used as `-abc=v`, not `-abc v`.
+- While setting `--dir`/`--output`, **Escape** the special characters if the value contains two or more special characters, e.g. `--dir=E:\\foo\\bar`.
 
 ## License
 

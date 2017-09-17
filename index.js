@@ -30,7 +30,9 @@ htree.defaults = {
   sort: false,
   size: false,
   order: true,
-  showDir: true
+  showDir: true,
+  dot: false,
+  underline: true
 };
 
 module.exports = htree;
