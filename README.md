@@ -117,9 +117,7 @@ The gap string between `strConcat` and the name of the directory or file.
 - type: string
 - default: ' '
 
-The indent string for the child directory or file.
-
-> When used in CLI, it is at least one space.
+The indent string for the children of a directory.
 
 ### strComment
 
@@ -142,7 +140,9 @@ The pad-end length for `strComment`. Simillar to `padEnd` in `ES8`.
 - type: string
 - default: `process.cwd()`
 
-The entrance directory for htree.
+The entrance directory for htree. If `dir` does not contain the character `:`, it will be considered as a relative path to `cwd`.
+
+> `cwd` = `current work directory`
 
 ### folder
 
@@ -193,7 +193,7 @@ See [help](docs/help) for more information.
 
 Additional notes:
 
-> Short command is the command which use only a single character after `-`.
+> Short command is the command which uses only a single character after `-`.
 
 - Supported short commands:
   - `-v`, `--version`
@@ -204,12 +204,10 @@ Additional notes:
   - `-d`, `--dir`
   - `-i`, `--ignore`
   - `-m`, `--max-depth`
-- If `--dir` not contain the character `:`, it will be a relative path to the `cwd`.
-- `--no-` is not support short command.
-- `--str-indent` is not support empty string.
-- Short command combination must be used as `-abc=v`, not `-abc v`.
-
-> `cwd` = `current work directory`
+- If the value of `--dir` does not contain the character `:`, it will be considered as a relative path to `cwd`.
+- `--no-` does not support short command.
+- `--str-indent` does not support **empty string**.
+- Short command combination **must** be used as `-abc=v`, not `-abc v`.
 
 ## License
 
