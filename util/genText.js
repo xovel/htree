@@ -16,10 +16,13 @@ module.exports = function (list, options) {
 
     list.forEach((text, index) => {
       let temp;
+      let curText = text;
+
       if (options.size) {
         temp = text.split('/');
+        curText = temp[0];
       }
-      let curText = options.size ? temp[0] : text;
+
       let ret = curText + ' '.repeat(textMaxLen + options.padLength - getByteLength(curText)) + options.strComment;
       if (options.size && temp[1]) {
         ret += ' ' + temp[1];

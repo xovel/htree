@@ -13,7 +13,6 @@ Options:
   -s, --show-dir            Show current directory.
   --order                   Rearrangement the order of dirs and files.
   --size                    Show the size of files.
-  --size-suffix-space       Add a space between size value and size suffix.
   --sort                    Sort dir/file by default. [deprecated]
   # Use prefix `--no-` to set a false value, e.g. `--no-size`.
 
@@ -30,4 +29,4 @@ Options:
   --str-comment             The `comment` string.
   --pad-length              The length of `pad-end`.
 
-For more information, visit the documentation of htree.
+For more information, please visit the documentation of htree.

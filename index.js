@@ -29,7 +29,6 @@ htree.defaults = {
   folder: false,
   sort: false,
   size: false,
-  sizeSuffixSpace: true,
   order: true,
   showDir: true
 };

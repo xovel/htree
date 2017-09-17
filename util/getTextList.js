@@ -1,5 +1,5 @@
 module.exports = function genText(list, options, prefix = '') {
-  var ret = [];
+  let ret = [];
 
   for (let i = 0; i < list.length; i++) {
     let item = list[i];

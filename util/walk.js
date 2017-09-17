@@ -1,15 +1,17 @@
 const fs = require('fs');
 const path = require('path');
-const sort = require('./sort');
 const getSize = require('./getSize');
 
 module.exports = function walk(dir, deep, options) {
   let curList = fs.readdirSync(dir);
-  if (options.sort) {
-    curList = options.sortCase ? curList.sort(sort) : curList.sort();
-  }
   let ret = [];
-  let fileList = [];
+  let orderList = [];
+  let temp;
+
+  if (options.sort) {
+    curList.sort();
+  }
+
   curList.forEach((name, index) => {
     if (options.ignore.indexOf(name) === -1 && deep <= options.maxDeep) {
       let curFilePath = path.join(dir, name);
@@ -21,18 +23,19 @@ module.exports = function walk(dir, deep, options) {
           children: walk(curFilePath, deep + 1, options)
         });
       } else if (!options.folder) {
+        temp = {
+          name,
+          deep
+        };
+
+        if (options.size) {
+          temp.size = getSize(curFileStat.size);
+        }
+
         if (options.order) {
-          fileList.push({
-            name,
-            deep,
-            size: options.size ? getSize(curFileStat.size) : ''
-          });
+          orderList.push(temp);
         } else {
-          ret.push({
-            name,
-            deep,
-            size: options.size ? getSize(curFileStat.size) : ''
-          });
+          ret.push(temp);
         }
       }
     }
@@ -40,9 +43,9 @@ module.exports = function walk(dir, deep, options) {
 
   if (options.order) {
     if (options.order === 'back') {
-      ret = ret.concat(fileList);
+      ret = ret.concat(orderList);
     } else {
-      ret = fileList.concat(ret);
+      ret = orderList.concat(ret);
     }
   }
 

@@ -110,13 +110,10 @@ function core(argv, callback) {
     if (output.indexOf(':') === -1) {
       output = path.join(process.cwd(), output);
     }
-    if (fs.existsSync(output)) {
-      if (!force) {
-        process.stdout.write(`Warning: file ${output} already exist, use \`--force\` to overwrite it.\n`);
-        return;
-      }
+    if (!force && fs.existsSync(output)) {
+      process.stdout.write(`Warning: file ${output} already exist, use \`--force\` to overwrite it.\n`);
+      return;
     }
-
     fs.writeFile(output, ret, callback);
   } else {
     process.stdout.write(ret + '\n');
