@@ -14,12 +14,15 @@ Options:
   --order                   Rearrangement the order of dirs and files.
   --size                    Show the size of files.
   --sort                    Sort dir/file by default. [deprecated]
+  --dot                     Include the directory begins with `.`.
+  --underline               Include the directory begins with `_`.
   # Use prefix `--no-` to set a false value, e.g. `--no-size`.
 
   # VALUE
   -d, --dir                 Htree directory.
   -m, --max-depth           Max depth for directory.
   -i, --ignore              Ignore list, use comma to seperate them.
+  --exclude                 Exclude the directory depending on RegExp.
   --str-node                The `node` string.
   --str-last                The `last` string.
   --str-pipe                The `pipe` string.

@@ -6,12 +6,13 @@ const htree = require('../');
 const pkg = require('../package.json');
 
 function core(argv, callback) {
+  let options = {};
+  let force = false;
+  let exclude;
   let output;
   let arg;
   let opt;
   let value;
-  let options = {};
-  let force = false;
 
   while (argv.length) {
     let arg = argv.shift();
@@ -49,6 +50,9 @@ function core(argv, callback) {
       case '-o':
       case '--output':
         output = argv.shift();
+        break;
+      case '--exclude':
+        exclude = argv.shift();
         break;
       case '--force':
         force = true;
@@ -107,6 +111,10 @@ function core(argv, callback) {
   }
   if (options.padLength) {
     options.padLength = +options.padLength;
+  }
+
+  if (exclude) {
+    options.exclude = new RegExp(exclude, 'i');
   }
 
   let ret = htree(options);

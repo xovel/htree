@@ -13,6 +13,7 @@ let htree = function (options) {
 
 htree.defaults = {
   ignore: [],
+  exclude: '',
   maxDepth: 5,
   strNode: '├',
   strLast: '└',

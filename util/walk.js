@@ -8,27 +8,38 @@ module.exports = function walk(dir, deep, options) {
   let orderList = [];
   let temp;
 
-  // if (deep === 1 && options.dir.length === 3 && options.dir.indexOf(':\\') === 1) {
-  //   temp = curList.indexOf('System Volume Information');
-  //   if (temp !== -1) {
-  //     curList.splice(temp, 1);
-  //   }
-  //   temp = curList.indexOf('Documents and Settings');
-  //   if (temp !== -1) {
-  //     curList.splice(temp, 1);
-  //   }
-  // }
-
   if (options.sort) {
     curList.sort();
+  }
+
+  function checkDir(name) {
+    if (options.exclude && options.exclude.test && options.exclude.test(name)) {
+      return false;
+    }
+
+    if (name[0] === '.' && !options.dot) {
+      return false;
+    }
+
+    if (name[0] === '_' && !options.underline) {
+      return false;
+    }
+
+    return true;
   }
 
   curList.forEach((name, index) => {
     if (options.ignore.indexOf(name) === -1 && deep <= options.maxDepth) {
       let curFilePath = path.join(dir, name);
-      let curFileStat = fs.statSync(curFilePath);
+      let curFileStat;
+      try {
+        curFileStat = fs.statSync(curFilePath);
+      } catch (e) {
+        process.stdout.write(e.toString() + '\n');
+        process.exit(0);
+      }
       if (curFileStat.isDirectory()) {
-        if (!(name[0] === '.' && !options.dot) && !(name[0] === '_' && !options.underline)) {
+        if (checkDir(name)) {
           ret.push({
             name,
             deep,
@@ -55,7 +66,7 @@ module.exports = function walk(dir, deep, options) {
   });
 
   if (options.order) {
-    if (options.order === 'back') {
+    if (options.order === 'after') {
       ret = ret.concat(orderList);
     } else {
       ret = orderList.concat(ret);
