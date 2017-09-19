@@ -22,6 +22,7 @@ htree.defaults = {
   strGap: '',
   strIndent: ' ',
   strComment: '',
+  strSuffix: '/',
   padLength: 10,
   dir: process.cwd(),
   folder: false,
@@ -30,7 +31,8 @@ htree.defaults = {
   order: true,
   showDir: true,
   dot: false,
-  underline: true
+  underline: true,
+  suffix: false
 };
 
 module.exports = htree;

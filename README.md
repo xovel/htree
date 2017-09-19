@@ -82,6 +82,7 @@ htree.defaults = {
   strGap: '',
   strIndent: ' ',
   strComment: '',
+  strSuffix: '/',
   padLength: 10,
   dir: process.cwd(),
   folder: false,
@@ -90,7 +91,8 @@ htree.defaults = {
   order: true,
   showDir: true,
   dot: false,
-  underline: true
+  underline: true,
+  suffix: false
 };
 ```
 
@@ -174,6 +176,13 @@ The comment string for each line. When it is been set, htree will calculate the 
 
 > If options `size` is true and `strComment` is not set, set `strComment` to `#` automatically.
 
+### strSuffix
+
+- type: string
+- default: '/'
+
+The suffix for direcorty. It is available while `suffix` is true.
+
 ### padLength
 
 - type: integer
@@ -242,6 +251,13 @@ If the name of a directory begins with character `.` and `dot` is **false**, **i
 - default: `true`
 
 If the name of a directory begins with character `_` and `underline` is **false**, **ignore** the directory.
+
+### suffix
+
+- type: boolean
+- default: `false`
+
+Whether add a suffix to a directory. The suffix string is specified as `strSuffix`.
 
 ## CLI options
 

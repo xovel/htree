@@ -6,26 +6,24 @@ module.exports = function (list, options) {
   }
   if (options.strComment) {
     let textMaxLen = 0;
-
     list.forEach((text) => {
-      let curLen = getByteLength(options.size ? text.split('/')[0] : text);
+      let curLen = getByteLength(Array.isArray(text) ? text[0] : text);
       if (textMaxLen < curLen) {
         textMaxLen = curLen;
       }
     });
 
     list.forEach((text, index) => {
-      let temp;
-      let curText = text;
+      let size;
 
-      if (options.size) {
-        temp = text.split('/');
-        curText = temp[0];
+      if (Array.isArray(text)) {
+        size = text[1];
+        text = text[0];
       }
 
-      let ret = curText + ' '.repeat(textMaxLen + options.padLength - getByteLength(curText)) + options.strComment;
-      if (options.size && temp[1]) {
-        ret += ' ' + temp[1];
+      let ret = text + ' '.repeat(textMaxLen + options.padLength - getByteLength(text)) + options.strComment;
+      if (size) {
+        ret += ' ' + size;
       }
       list[index] = ret;
     });

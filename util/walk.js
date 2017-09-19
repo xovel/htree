@@ -3,7 +3,13 @@ const path = require('path');
 const getSize = require('./getSize');
 
 module.exports = function walk(dir, deep, options) {
-  let curList = fs.readdirSync(dir);
+  let curList;
+  try {
+    curList = fs.readdirSync(dir);
+  } catch (e) {
+    process.stdout.write(e.toString() + '\n');
+    process.exit(0);
+  }
   let ret = [];
   let orderList = [];
   let temp;
@@ -41,7 +47,7 @@ module.exports = function walk(dir, deep, options) {
       if (curFileStat.isDirectory()) {
         if (checkDir(name)) {
           ret.push({
-            name,
+            name: name + (options.suffix && options.strSuffix ? options.strSuffix : ''),
             deep,
             children: walk(curFilePath, deep + 1, options)
           });

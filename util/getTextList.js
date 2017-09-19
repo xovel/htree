@@ -17,7 +17,7 @@ module.exports = function genText(list, options, prefix = '') {
     curText = curPrefix + item.name;
 
     if (options.size && item.size) {
-      curText += '/' + item.size;
+      curText = [curText, item.size];
     }
 
     ret.push(curText);
