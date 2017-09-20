@@ -15,14 +15,13 @@ htree.defaults = {
   ignore: [],
   exclude: '',
   maxDepth: 5,
-  strNode: '├',
-  strLast: '└',
-  strPipe: '│',
-  strConcat: '─',
-  strGap: '',
-  strIndent: ' ',
-  strComment: '',
+  gap: false,
+  concatLength: 1,
+  indent: true,
+  indentLength: 1,
+  suffix: false,
   strSuffix: '/',
+  strComment: '',
   padLength: 10,
   dir: process.cwd(),
   folder: false,
@@ -31,8 +30,7 @@ htree.defaults = {
   order: true,
   showDir: true,
   dot: false,
-  underline: true,
-  suffix: false
+  underline: true
 };
 
 module.exports = htree;

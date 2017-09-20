@@ -75,14 +75,13 @@ htree.defaults = {
   ignore: [],
   exclude: '',
   maxDepth: 5,
-  strNode: '├',
-  strLast: '└',
-  strPipe: '│',
-  strConcat: '─',
-  strGap: '',
-  strIndent: ' ',
-  strComment: '',
+  gap: false,
+  concatLength: 1,
+  indent: true,
+  indentLength: 1,
+  suffix: false,
   strSuffix: '/',
+  strComment: '',
   padLength: 10,
   dir: process.cwd(),
   folder: false,
@@ -91,8 +90,7 @@ htree.defaults = {
   order: true,
   showDir: true,
   dot: false,
-  underline: true,
-  suffix: false
+  underline: true
 };
 ```
 
@@ -101,7 +99,7 @@ htree.defaults = {
 - type: array
 - default: []
 
-Ignore list, if the name of directory or file is in the ignore list, ignore it.
+Ignore list, if the name of a directory/file is in the ignore list, ignore it.
 
 ### exclude
 
@@ -123,49 +121,33 @@ The max depth for the direcory to access.
 
 If you want to access all files, set this to a very large value, e.g. 99999999.
 
-### strNode
+### gap
+
+- type: boolean
+- default: `false`
+
+Whether use a gap space ` ` before the name of a directory/file.
+
+### concatLength
+
+- type: integer
+- default: 1
+
+The repeat times of concat string `─` before a directory/file.
+
+### suffix
+
+- type: boolean
+- default: `false`
+
+Whether add a suffix to a directory. The suffix string is specified as `strSuffix`.
+
+### strSuffix
 
 - type: string
-- default: '├'
+- default: '/'
 
-Indicate the directory/file is a `node` or **not** the `last` one.
-
-### strLast
-
-- type: string
-- default: '└'
-
-Indicate the directory/file is the `last` one.
-
-### strPipe
-
-- type: string
-- default: '│'
-
-`strPipe` is used as a prefix when the depth is more than 1.
-
-> Note: `strNode`/`strLast`/`strPipe` should be set the same width.
-
-### strConcat
-
-- type: string
-- default: '─'
-
-The concatenate string for `strNode`/`strLast` and the name of the directory/file.
-
-### strGap
-
-- type: string
-- default: ''
-
-The gap string between `strConcat` and the name of the directory/file.
-
-### strIndent
-
-- type: string
-- default: ' '
-
-The indent string for the children of a directory.
+The suffix for direcorty. It is available while `suffix` is true.
 
 ### strComment
 
@@ -175,13 +157,6 @@ The indent string for the children of a directory.
 The comment string for each line. When it is been set, htree will calculate the max length of all lines and pad the end by `padLength` with a single space, then concat the `strComment`.
 
 > If options `size` is true and `strComment` is not set, set `strComment` to `#` automatically.
-
-### strSuffix
-
-- type: string
-- default: '/'
-
-The suffix for direcorty. It is available while `suffix` is true.
 
 ### padLength
 
@@ -251,13 +226,6 @@ If the name of a directory begins with character `.` and `dot` is **false**, **i
 - default: `true`
 
 If the name of a directory begins with character `_` and `underline` is **false**, **ignore** the directory.
-
-### suffix
-
-- type: boolean
-- default: `false`
-
-Whether add a suffix to a directory. The suffix string is specified as `strSuffix`.
 
 ## CLI options
 

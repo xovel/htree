@@ -3,17 +3,11 @@ module.exports = function genText(list, options, prefix = '') {
 
   for (let i = 0; i < list.length; i++) {
     let item = list[i];
-    let curPrefix = '';
+    let curPrefix = i === list.length - 1 ? '└' : '├';
     let childPrefix = '';
     let curText = '';
 
-    if (i === list.length - 1) {
-      curPrefix = options.strLast;
-    } else {
-      curPrefix = options.strNode;
-    }
-
-    curPrefix = prefix + curPrefix + options.strConcat + options.strGap;
+    curPrefix = prefix + curPrefix + '─'.repeat(options.concatLength) + (options.gap ? ' ' : '');
     curText = curPrefix + item.name;
 
     if (options.size && item.size) {
@@ -22,7 +16,7 @@ module.exports = function genText(list, options, prefix = '') {
 
     ret.push(curText);
     if (item.children && item.children.length > 0) {
-      childPrefix = options.strPipe + ' ' + options.strGap + options.strIndent;
+      childPrefix = '│' + ' '.repeat(options.concatLength) + (options.gap ? ' ' : '') + (options.indent ? ' '.repeat(options.indentLength) : '');
       if (i === list.length - 1) {
         childPrefix = ' '.repeat(childPrefix.length);
       }
