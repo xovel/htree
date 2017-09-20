@@ -91,7 +91,7 @@ function core(argv, callback) {
         }
         break;
       default:
-        setOptions(arg)
+        setOptions(arg);
         break;
     }
   }

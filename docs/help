@@ -11,6 +11,9 @@ Options:
   # BOOLEAN
   -f, --folder              Only folder.
   -s, --show-dir            Show current directory.
+  --gap                     Add a space before the directory/file.
+  --concat-length           The repeat times of concat string.
+  --suffix                  Add a suffix to a directory.
   --order                   Rearrangement the order of dirs and files.
   --size                    Show the size of files.
   --sort                    Sort dir/file by default. [deprecated]
@@ -23,12 +26,7 @@ Options:
   -m, --max-depth           Max depth for directory.
   -i, --ignore              Ignore list, use comma to seperate them.
   --exclude                 Exclude the directory depending on RegExp.
-  --str-node                The `node` string.
-  --str-last                The `last` string.
-  --str-pipe                The `pipe` string.
-  --str-concat              The `concat` string.
-  --str-gap                 The `gap` string.
-  --str-indent              The `indent` string.
+  --str-suffix              The suffix string for directory.
   --str-comment             The `comment` string.
   --pad-length              The length of `pad-end`.
 
