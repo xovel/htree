@@ -250,7 +250,6 @@ Additional notes:
   - `-m`, `--max-depth`
 - If the value of `--dir` does not contain the character `:`, it will be considered as a relative path to `cwd`.
 - `--no-` does not support short command.
-- `--str-indent` does not support **empty string**.
 - Short command combination **must** be used as `-abc=v`, not `-abc v`.
 - **Escape** the special characters when setting values, especially `--dir`, `--output`, `--exclude`, e.g. `--dir=E:\\foo\\bar`.
 - `--exclude` will set a regular expression(ignore case) to `options.exclude`, so ensure its correctness.
