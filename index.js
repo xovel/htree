@@ -2,20 +2,19 @@ const walk = require('./util/walk');
 const getTextList = require('./util/getTextList');
 const genText = require('./util/genText');
 
-let htree = function (options) {
-  options = Object.assign(htree.defaults, options || {});
-
+function htree(options) {
+  options = Object.assign({}, htree.defaults, options || {});
   let walkList = walk(options.dir, 1, options);
   let textList = getTextList(walkList, options);
 
   return genText(textList, options);
-};
+}
 
 htree.defaults = {
   ignore: [],
-  exclude: '',
-  maxDepth: 5,
-  gap: false,
+  exclude: /node_modules/,
+  maxDepth: 20,
+  gap: true,
   concatLength: 1,
   indent: true,
   indentLength: 1,
@@ -27,7 +26,7 @@ htree.defaults = {
   folder: false,
   sort: false,
   size: false,
-  order: true,
+  order: 'after',
   showDir: true,
   dot: false,
   underline: true

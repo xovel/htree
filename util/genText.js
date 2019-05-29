@@ -1,3 +1,5 @@
+'use strict';
+
 const getByteLength = require('./getByteLength');
 
 module.exports = function (list, options) {
@@ -6,7 +8,7 @@ module.exports = function (list, options) {
   }
   if (options.strComment) {
     let textMaxLen = 0;
-    list.forEach((text) => {
+    list.forEach(text => {
       let curLen = getByteLength(Array.isArray(text) ? text[0] : text);
       if (textMaxLen < curLen) {
         textMaxLen = curLen;

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function getSize(size) {
   let suffix = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB', 'DB', 'NB'];
   let i = 0;
