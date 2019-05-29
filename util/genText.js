@@ -4,9 +4,12 @@ const getByteLength = require('./getByteLength');
 
 module.exports = function (list, options) {
   if (options.size) {
-    options.strComment = options.strComment || '#';
+    options.comment = options.comment || '#';
   }
-  if (options.strComment) {
+  if (options.comment) {
+    if (typeof options.comment !== 'string') {
+      options.comment = '#';
+    }
     let textMaxLen = 0;
     list.forEach(text => {
       let curLen = getByteLength(Array.isArray(text) ? text[0] : text);
@@ -23,7 +26,7 @@ module.exports = function (list, options) {
         text = text[0];
       }
 
-      let ret = text + ' '.repeat(textMaxLen + options.padLength - getByteLength(text)) + options.strComment;
+      let ret = text + ' '.repeat(textMaxLen + options.padLength - getByteLength(text)) + options.comment;
       if (size) {
         ret += ' ' + size;
       }

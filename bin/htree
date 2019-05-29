@@ -23,8 +23,8 @@ function core(argv, callback) {
     return help();
   }
 
-  if (options.d || options.dir) {
-    options.dir = options.d || options.dir;
+  if (options.d || options.dir || options._[0]) {
+    options.dir = options.d || options.dir || options._[0];
   }
   if (options.f || options.folder) {
     options.folder = true;
@@ -37,7 +37,7 @@ function core(argv, callback) {
   }
 
   if (options.dir) {
-    if (options.dir.indexOf(':') === -1) {
+    if (options.dir.indexOf(':') === -1 && options.dir[0] !== '/') {
       options.dir = path.join(process.cwd(), options.dir);
     }
     if (!fs.existsSync(options.dir)) {

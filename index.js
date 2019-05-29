@@ -20,7 +20,7 @@ htree.defaults = {
   indentLength: 1,
   suffix: false,
   strSuffix: '/',
-  strComment: '',
+  comment: '',
   padLength: 10,
   dir: process.cwd(),
   folder: false,

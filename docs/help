@@ -19,6 +19,7 @@ Options:
   --sort                    Sort dir/file by default. [deprecated]
   --dot                     Include the directory begins with `.`.
   --underline               Include the directory begins with `_`.
+
   # Use prefix `--no-` to set a false value, e.g. `--no-size`.
 
   # VALUE
