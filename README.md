@@ -215,6 +215,13 @@ If the name of a directory begins with character `.` and `dot` is **false**, **i
 
 If the name of a directory begins with character `_` and `underline` is **false**, **ignore** the directory.
 
+### ascii
+
+- type: boolean
+- default: `false`
+
+Use ASCII base character `` `|- `` instead of the extend table character `└`, `├`, `│` and `─`.
+
 ## CLI options
 
 Options above can all be specified by `kebab-case` and a prefix `--`.

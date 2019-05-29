@@ -29,6 +29,9 @@ function core(argv, callback) {
   if (options.f || options.folder) {
     options.folder = true;
   }
+  if (options.a || options.ascii) {
+    options.ascii = true;
+  }
   if (options.i || options.ignore) {
     options.ignore = (options.i || options.ignore).split(',');
   }
