@@ -243,6 +243,7 @@ Additional notes:
   - `-d`, `--dir`
   - `-i`, `--ignore`
   - `-m`, `--max-depth`
+  - `-a`, `--ascii`
 - If the value of `--dir` does not contain the character `:`, it will be considered as a relative path to `cwd`.
 - `--no-` does not support short command.
 - Short command combination **must** be used as `-abc=v`, not `-abc v`.

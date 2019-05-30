@@ -11,30 +11,39 @@ const htree = require('../');
 const pkg = require('../package.json');
 
 function core(argv, callback) {
-  const options = psargv(argv);
+  const options = psargv(argv, {
+    number: true,
+    alias: {
+      h: 'help',
+      v: 'version',
+      o: 'output',
+      s: 'showDir',
+      f: 'folder',
+      d: 'dir',
+      i: 'ignore',
+      m: 'maxDepth',
+      a: 'ascii'
+    }
+  });
 
-  if (options.v || options.version) {
+  if (options.version) {
     return version();
   }
 
-  if (options.h || options.help) {
+  if (options.help) {
     return help();
   }
 
-  if (options.d || options.dir || options._[0]) {
-    options.dir = options.d || options.dir || options._[0];
+  if (options.dir || options._[0]) {
+    options.dir = options.dir || options._[0];
   }
-  if (options.f || options.folder) {
-    options.folder = true;
+  if (options.ignore) {
+    options.ignore = options.ignore.split(',');
   }
-  if (options.a || options.ascii) {
-    options.ascii = true;
-  }
-  if (options.i || options.ignore) {
-    options.ignore = (options.i || options.ignore).split(',');
-  }
-  if (options.m || options.maxDepth) {
-    options.maxDepth = +(options.m || options.maxDepth);
+  if (options.exclude) {
+    options.exclude = new RegExp(options.exclude, 'i');
+  } else if (options.exclude === false) {
+    options.exclude = '';
   }
 
   if (options.dir) {
@@ -47,22 +56,12 @@ function core(argv, callback) {
     }
   }
 
-  if (options.padLength) {
-    options.padLength = +options.padLength;
-  }
-
-  if (options.exclude) {
-    options.exclude = new RegExp(options.exclude, 'i');
-  } else if (options.exclude === false) {
-    options.exclude = ''
-  }
-
-  let ret = htree(options);
+  const ret = htree(options);
 
   let output = options.o || options.output;
 
   if (output) {
-    if (output.indexOf(':') === -1) {
+    if (output.indexOf(':') === -1 || output[0] !== '/') {
       output = path.join(process.cwd(), output);
     }
     if (!options.force && fs.existsSync(output)) {
@@ -78,7 +77,7 @@ function core(argv, callback) {
 }
 
 function help() {
-  let helpFilePath = path.join(__dirname, '../docs/help');
+  let helpFilePath = path.join(__dirname, 'help.txt');
   let text = fs.readFileSync(helpFilePath, 'utf-8');
   process.stdout.write(text + '\n');
 }
