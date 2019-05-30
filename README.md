@@ -20,14 +20,14 @@ yarn global add htree
 
 ```
 ├─ bin
+│   ├─ help.txt
 │   └─ htree
-├─ docs
-│   └─ help
-├─ util
-│   ├─ genText.js
-│   ├─ getByteLength.js
-│   ├─ getSize.js
-│   ├─ getTextList.js
+├─ lib
+│   ├─ gen.js
+│   ├─ htree.js
+│   ├─ len.js
+│   ├─ size.js
+│   ├─ text.js
 │   └─ walk.js
 ├─ .eslintrc.yml
 ├─ .gitignore
