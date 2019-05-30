@@ -13,8 +13,6 @@ const pkg = require('../package.json');
 function core(argv, callback) {
   const options = psargv(argv);
 
-  const output = options.output;
-
   if (options.v || options.version) {
     return version();
   }
@@ -60,6 +58,8 @@ function core(argv, callback) {
   }
 
   let ret = htree(options);
+
+  let output = options.o || options.output;
 
   if (output) {
     if (output.indexOf(':') === -1) {

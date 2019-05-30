@@ -1,6 +1,6 @@
 {
   "name": "htree",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "The same as `tree` in Linux/Windows, htree is for node.js.",
   "main": "index.js",
   "bin": {
